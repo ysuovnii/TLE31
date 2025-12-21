@@ -36,13 +36,23 @@ int main() {
 
         int alice = 0, bob = 0;
         int chance = 0; 
+        
         while(!allOne(s)) {
             if(chance%2 == 0) {
                 if(isPal(s)) {
                     alice+=0;
                 } else {
+                    int count = 0;
+                    for(char c : s) {
+                        if(c == '0') count++; 
+                    }
                     for(char& c : s) {
-                        if(c == '0') {
+                        if(c == '0' && count > 0) {
+                            c = '1';
+                            if(isPal(s)) c = '0';
+                            count--;
+                        }
+                        else if(c == '0' && count == 0) {
                             c = '1';
                             break;
                         }
@@ -53,8 +63,14 @@ int main() {
                 if(isPal(s)) {
                     bob+=0;
                 } else {
+                    int count = 0;
                     for(char& c : s) {
-                        if(c == '0') {
+                        if(c == '0' && count > 0) {
+                            c = '1';
+                            if(isPal(s)) c = '0';
+                            count--;
+                        }
+                        else if(c == '0' && count == 0) {
                             c = '1';
                             break;
                         }
