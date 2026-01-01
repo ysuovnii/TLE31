@@ -12,33 +12,33 @@ int main() {
     int l, r;
     cin >> n; 
     vector<int> a(n+1);
-
+    vector<int> diff(n), nextNonZero(n, -1);
     for(int i = 1; i <= n; i++) {
       cin >> a[i];
     }
+
+    for(int i = 2; i <= n; i++) {
+      diff[i-1] = a[i]-a[i-1];
+    }
+
+    int last = -1;
+    for(int i = n-1; i >= 1; i--) {
+      if(diff[i] != 0) last = i;
+      nextNonZero[i] = last;
+    }
+
+
 
     cin >> q;
     while(q--) {
       cin >> l >> r;
       int i = -1, j = -1;
 
-      while(l <= r) {
-        int mid = l + (r-l)/2;
-        if(a[l] != a[r]) {
-          i = l, j = r;
-          break;
-        }
-        else if(a[l] != a[mid]) {
-          i = l, j = mid;
-          break;
-        }
-        else if(a[mid] != a[r]) {
-          i = mid, j = r;
-          break;
-        }
-        else {
-          r--;
-        }
+      int k = nextNonZero[l];
+
+      if(k != -1 && k < r) {
+        i = k;
+        j = k+1;
       }
 
       cout << i << " " << j << "\n";
