@@ -3,10 +3,6 @@ using namespace std;
 
 #define ll long long
 
-ll lcm(ll a, ll b){
-    return (a / __gcd(a, b)) * b;
-}
-
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -21,16 +17,15 @@ int main() {
             a = n/2, b = n/2; 
         }
         else {
-            ll minLcm = LLONG_MAX;
-            ll l = 1, r = n-1;
-            while(l <= r) {
-                if(minLcm >= lcm(l, r)) {
-                    minLcm = lcm(l, r);
-                    a = l, b = r;
+            ll div = 1;
+            for (ll i = 2; i * i <= n; i++) {
+                if (n % i == 0) {
+                    div = n / i;
+                    break;
                 }
-                l++;
-                r--;
-            }    
+            }   
+            a = div;
+            b = n-div;
         }
 
         cout << a << " " << b << "\n";
