@@ -18,8 +18,7 @@ int main() {
         for(int i = 0; i < n; i++) {
             if(t == a[i]) {
                 pos = i+1;
-                a.erase(a.begin() + i);
-                a.insert(a.begin(), t);
+                rotate(a.begin(), a.begin() + i, a.begin() + i + 1);
                 break;
             }
         }
