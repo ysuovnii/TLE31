@@ -3,6 +3,13 @@ using namespace std;
 
 #define ll long long 
 
+ll getSum(ll d, ll k) {
+    if (d <= k)
+        return d * (d + 1) / 2;
+    ll down = d - k;
+    return k * (k + 1) / 2 + down * k - down * (down + 1) / 2;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -14,24 +21,19 @@ int main() {
         cin >> k >> x;
         ll ans = 0;
     
-        if(k^2 <= x) {
+        if(k*k < x) {
             ans = 2*k-1;
         } 
         else {
-            ll start = 1, end = k^2;
-            ll currentLine = k;
-            while(start <= end) {
-                ll mid = sqrt(end) * (sqrt(end) + 1) / 2;
-
-                if(mid-(k-1) <= x <= mid) {
-                    ans = currentLine;
-                    break;
-                }
-                else if(mid > x) {
-                    currentLine--;
-                }
-                else { // mid < x
-                    currentLine++;
+            ll start = 1, end = 2*k-1;
+            while (start <= end) {
+                ll mid = start + (end-start)/2;
+                if(getSum(mid, k) >= x) {
+                    ans = mid;
+                    end = mid-1;
+                    
+                } else {
+                    start = mid+1;
                 }
             }
         }
