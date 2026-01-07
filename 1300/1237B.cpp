@@ -41,7 +41,7 @@ int main() {
 
     }
     
+    cout << count;
 
-
-    return count;
+    return 0;
 }
