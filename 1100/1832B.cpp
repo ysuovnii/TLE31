@@ -14,7 +14,7 @@ int main() {
     cin >> n >> k;
     vector<ll> a(n);
     ll sum = 0;
-    for(int&i : a) {
+    for(ll&i : a) {
       cin >> i;
       sum += i;
     }
